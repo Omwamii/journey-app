@@ -18,15 +18,18 @@ const markedDates = data.reduce((acc, entry) => {
   }
   return acc;
 }, {});
+
 const CalendarScreen = () => {
   const router = useRouter();
 
   const handleDayPress = (day) => {
     // day.dateString will be in 'YYYY-MM-DD' format
     // Navigate to a new screen with entries for that day.
-    // router.push(`/entries/date/${day.dateString}`);
+    router.push(`/entries/date/${day.dateString}`);
     console.log('day', day);
   };
+
+  console.log(markedDates)
 
   return (
     <View style={styles.container}>
