@@ -1,11 +1,14 @@
 import { Image, StyleSheet } from 'react-native'
+import { Link } from 'expo-router'
 
 const EntryMediaItem = ({ entry }) => {
   return (
-    <Image 
-        source={entry.image}
-        style={styles.imageStyles}
-    />
+    <Link href={`/entries/${entry.id}`}>
+      <Image 
+          source={entry.image}
+          style={styles.imageStyles}
+      />
+    </Link>
   )
 }
 
@@ -14,9 +17,7 @@ const styles = StyleSheet.create({
         width: 150,
         height: 120,
         resizeMode: 'cover',
-        borderColor: 'green',
-        borderWidth: 1,
-        borderStyle: 'solid',
+        marginRight: 10,
     }
 })
 

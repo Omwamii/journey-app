@@ -1,10 +1,12 @@
-import { Image, StyleSheet } from 'react-native'
+import { Image, Pressable, StyleSheet } from 'react-native'
 import { View, Text } from '@/components/Themed'
 import React from 'react'
-import { useLocalSearchParams, Stack, useRouter } from 'expo-router'
+import { useLocalSearchParams, Stack, useRouter, Link } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import data from '@/constants/data'
 import EntriesNavigation from '@/components/EntriesNavigation';
+import { FontAwesome } from '@expo/vector-icons'
+import { Colors } from '@/constants/Colors'
 
 
 const EntryDetailsScreen = () => {
@@ -12,7 +14,7 @@ const EntryDetailsScreen = () => {
     const router = useRouter();
 
     const currentIndex = data.findIndex(entry => entry.id === id);
-  const entry = data[currentIndex];
+    const entry = data[currentIndex];
 
     if (!entry) {
         return <Text>Entry not found</Text>
@@ -32,9 +34,45 @@ const EntryDetailsScreen = () => {
           }
     }
 
+    const headerRight =  () => (
+            <View style={{ flexDirection: 'row' }}>
+                <Link href={`/entries/${id}/edit`} asChild>
+                <Pressable>
+                    {({ pressed }) => (
+                    <FontAwesome
+                        name="edit"
+                        size={25}
+                        color={Colors.light.tint}
+                        style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                    />
+                    )}
+                </Pressable>
+                </Link>
+
+            <Link href=".." asChild>
+              <Pressable>
+                {({ pressed }) => (
+                  <FontAwesome
+                    name="star-o"
+                    size={25}
+                    color={Colors.light.tint}
+                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                  />
+                )}
+              </Pressable>
+            </Link>
+            </View>
+        )
+
   return (
     <View>
-        <Stack.Screen options={{ title: `Entry ${id}`}}/>
+        <Stack.Screen
+            options={{ 
+                title: `Entry ${id}`
+                , headerRight, 
+            }}
+        />
+
         <Image source={entry.image} style={styles.imageStyles} />
         <Text style={styles.entryText}>{entry.text}</Text>
 

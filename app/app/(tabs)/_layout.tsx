@@ -1,4 +1,4 @@
-import { Tabs } from 'expo-router';
+import { Stack, Tabs } from 'expo-router';
 import React from 'react';
 import { Platform } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
@@ -17,7 +17,9 @@ export default function TabLayout() {
   const colorScheme = useColorScheme();
 
   return (
-    <Tabs
+    <>
+      <Stack.Screen name="index" options={{ headerShown: false}}/>
+      <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
@@ -30,7 +32,7 @@ export default function TabLayout() {
         }),
       }}>
          <Tabs.Screen 
-            name="index" 
+            name="entries/index" 
             options={{
               title: 'Home',
               tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />
@@ -63,12 +65,36 @@ export default function TabLayout() {
 
 
         <Tabs.Screen
-          name="entries"
+          name="entries/[id]/index"
           options={{
             href: null,
           }}
         />
 
+
+        <Tabs.Screen
+          name="entries/[id]/edit/"
+          options={{
+            href: null,
+          }}
+        />
+
+        <Tabs.Screen
+          name="entries/date/[date]"
+          options={{
+            href: null,
+          }}
+        />
+
+        <Tabs.Screen 
+          name='index'
+          options={{
+            href: null,
+          }}
+        />
+
+
     </Tabs>
+    </>
   );
 }

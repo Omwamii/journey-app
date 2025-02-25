@@ -2,18 +2,19 @@ import { View, Text } from '@/components/Themed'
 import data from '@/constants/data'
 import { FlatList, StyleSheet } from 'react-native'
 import EntryMediaItem from '@/components/EntryMediaItem'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const media = () => {
   return (
-    <View style={styles.mediaContainer}>
-      <Text>Media files</Text>
+    <SafeAreaView style={styles.mediaContainer}>
+      <Text style={{ alignSelf: 'flex-start', marginBottom: 10, marginLeft: 10 }}>Media files</Text>
         <FlatList 
           data={data}
           renderItem={({ item }) => (<EntryMediaItem entry={item} />)}
           contentContainerStyle={{ gap: 10 }}
           numColumns={2}
         />
-    </View>
+    </SafeAreaView>
   )
 }
 
@@ -22,9 +23,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    borderColor: 'red',
-    borderWidth: 1,
-    borderStyle: 'solid',
     padding: 0,
   }
 })

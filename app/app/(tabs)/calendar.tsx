@@ -26,7 +26,7 @@ const CalendarScreen = () => {
     // day.dateString will be in 'YYYY-MM-DD' format
     // Navigate to a new screen with entries for that day.
     router.push(`/entries/date/${day.dateString}`);
-    console.log('day', day);
+    // console.log('day', day);
   };
 
   console.log(markedDates)
